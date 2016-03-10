@@ -1,4 +1,4 @@
-var j2c = (function () {
+var j2cPrefixPlugin = (function () {
   'use strict';
 
   var self$1 = {}
