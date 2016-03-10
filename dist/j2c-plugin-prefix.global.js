@@ -3,6 +3,12 @@ var j2cPrefixPlugin = (function () {
 
   var self$1 = {}
   var root = document.documentElement
+  function camelCase(str) {
+      return str.replace(/-([a-z])/g, function($0, $1) { return $1.toUpperCase(); }).replace('-','');
+  }
+  function deCamelCase(str) {
+      return str.replace(/[A-Z]/g, function($0) { return '-' + $0.toLowerCase() });
+  }
 
   var prefixes = {};
   var properties$1 = [];
@@ -31,7 +37,7 @@ var j2cPrefixPlugin = (function () {
       }
   };
   var supported = function(property) {
-      return StyleFix.camelCase(property) in dummy;
+      return camelCase(property) in dummy;
   };
   // Some browsers have numerical indices for the properties, some don't
   if(style && style.length > 0) {
@@ -41,7 +47,7 @@ var j2cPrefixPlugin = (function () {
   }
   else {
       for(var property in style) {
-          iterate(StyleFix.deCamelCase(property));
+          iterate(deCamelCase(property));
       }
   }
   // Find most frequently used prefix
@@ -54,7 +60,7 @@ var j2cPrefixPlugin = (function () {
       }
   }
   self$1.prefix = '-' + highest.prefix + '-';
-  self$1.Prefix = StyleFix.camelCase(self$1.prefix);
+  self$1.Prefix = camelCase(self$1.prefix);
   self$1.properties = [];
   // Get properties ONLY supported with a prefix
   for(var i=0; i<properties$1.length; i++) {

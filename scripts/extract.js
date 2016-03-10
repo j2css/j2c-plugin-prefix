@@ -32,11 +32,11 @@ ast.program.body[
           imports.push('root')
       }
       if (/\bcamelCase\b/.test(code)) {
-          code.replace('StyleFix.', '')
+          code = code.replace(/StyleFix\./g, '')
           imports.push('camelCase')
       }
       if (/\bdeCamelCase\b/.test(code)) {
-          code.replace('StyleFix.', '')
+          code = code.replace(/StyleFix\./g, '')
           imports.push('deCamelCase')
       }
       fs.writeFile('src/generated/'+name, 'import {' + imports.join(', ') + "} from '../fixers.js';\n" + code, function(err){

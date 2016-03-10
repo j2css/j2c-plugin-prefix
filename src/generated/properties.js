@@ -32,7 +32,7 @@ var iterate = function(property) {
     }
 },
 supported = function(property) {
-    return StyleFix.camelCase(property) in dummy;
+    return camelCase(property) in dummy;
 }
 // Some browsers have numerical indices for the properties, some don't
 if(style && style.length > 0) {
@@ -42,7 +42,7 @@ if(style && style.length > 0) {
 }
 else {
     for(var property in style) {
-        iterate(StyleFix.deCamelCase(property));
+        iterate(deCamelCase(property));
     }
 }
 // Find most frequently used prefix
@@ -55,7 +55,7 @@ for(var prefix in prefixes) {
     }
 }
 self.prefix = '-' + highest.prefix + '-';
-self.Prefix = StyleFix.camelCase(self.prefix);
+self.Prefix = camelCase(self.prefix);
 self.properties = [];
 // Get properties ONLY supported with a prefix
 for(var i=0; i<properties.length; i++) {
